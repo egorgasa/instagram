@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import InstaService from  '../services/instaService'
+import InstaService from '../services/instaService'
 import ErrorMessage from "./Error";
 
 export default class Palette extends Component {
@@ -7,16 +7,15 @@ export default class Palette extends Component {
 
     constructor(props) {
         super(props);
-       this.state={
-            error:false,
-            photo:[]
+        this.state = {
+            error: false,
+            photos: []
         }
     }
 
 
     componentDidMount() {
         this.updatePhotos()
-
     }
 
     updatePhotos() {
@@ -28,49 +27,38 @@ export default class Palette extends Component {
 
     onError = () => {
         this.setState({
-            error:true
+            error: true
         });
     }
 
     onPhotosLoaded = (photos) => {
         this.setState({
-            error:false,
-            photo:photos
+            error: false,
+            photos: photos
         });
 
     }
-renderItems(arr){
-         console.log('photo',arr)
 
-    return arr.map(item =>{
-        const {src,alt}=item;
-       return(<img src={src} alt={alt}></img>)
-    })
-}
-    //
-    // renderItems(arr) {
-    //     return arr.map(item =>{
-    //         const {src, alt} = item;
-    //         return (
-    //             <img src={src} alt={alt}/>
-    //         )
-    //
-    //     })
-    // }
+    renderItems(arr) {
+        return arr.map(item => {
+            const {src, alt} = item;
+            return (<img src={src} alt={alt}></img>)
+        })
+    }
 
-        render(){
-const {error,photo} = this.state;
+    render() {
+        const {error, photos} = this.state;
 
-        if(error) {
+        if (error) {
             return <ErrorMessage/>
         }
 
-     const items = this.renderItems(photo);
+        const items = this.renderItems(photos);
 
-        return(
-    <div className='palette'>
-        {items}
-    </div>
-            )
-        }
+        return (
+            <div className='palette'>
+                {items}
+            </div>
+        )
     }
+}

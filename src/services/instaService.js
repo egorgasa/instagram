@@ -1,12 +1,12 @@
-export default class instaService{
+export default class instaService {
     constructor() {
         this._apiBase = 'http://localhost:3000';
     }
 
     getResource = async (url) => {
-        const res = await fetch (`${this._apiBase}${url}`);
+        const res = await fetch(`${this._apiBase}${url}`);
 
-        if (!res.ok){
+        if (!res.ok) {
             throw new Error(`Could not fetch ${url}; received ${res.status}`);
         }
 
@@ -24,7 +24,7 @@ export default class instaService{
     }
 
     _transformPosts = (post) => {
-        return{
+        return {
             src: post.src,
             alt: post.alt
         }

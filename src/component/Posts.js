@@ -1,80 +1,81 @@
-import React , {Component} from "react";
+import React, {Component} from "react";
 import InstaService from '../services/instaService'
 import User from "./User";
 import ErrorMessage from "./Error";
 
-export default class Posts extends Component{
-       InstaService = new InstaService();
-       constructor() {
-           super();
-           this.state = {
-               posts:[],
-               error: false
-           }
-       }
+export default class Posts extends Component {
+    InstaService = new InstaService();
+
+    constructor() {
+        super();
+        this.state = {
+            posts: [],
+            error: false
+        }
+    }
 
 
     componentDidMount() {
-    this.updatePosts()
+        this.updatePosts()
     }
 
     updatePosts() {
-    this.InstaService.getAllPosts()
-        .then(this.onPostsLoaded)
-        .catch(this.onError);
-}
+        this.InstaService.getAllPosts()
+            .then(this.onPostsLoaded)
+            .catch(this.onError);
+    }
 
     onPostsLoaded = (posts) => {
-    this.setState({
-        posts:posts,
-        error:false
-    });
-    console.log(this.state.posts);
-}
+        this.setState({
+            posts: posts,
+            error: false
+        });
+        console.log(this.state.posts);
+    }
 
     onError = () => {
-    this.setState({
-        error: true
-    });
-    console.log('good')
-}
+        this.setState({
+            error: true
+        });
+        console.log('good')
+    }
 
-    renderItems(arr){
-    return arr.map(item =>{
-       const {name, altname, photo, src, alt, descr, id} = item;
+    renderItems(arr) {
+        return arr.map(item => {
+            const {name, altname, photo, src, alt, descr, id} = item;
 
-       return (
-           <div key={id} className='post'>
-               <User
-                     src={photo}
-                     alt={altname}
-                     name={name}
-                     min/>
-               <img src={src} alt={alt}></img>
-               <div className='post__name'>
-                   {name}
-               </div>
-               <div className='post__descr'>
-                   {descr}
-               </div>
-           </div>
-       )
-    });
-}
+            return (
+                <div key={id} className='post'>
+                    <User
+                        src={photo}
+                        alt={altname}
+                        name={name}
+                        min/>
+                    <img src={src} alt={alt}></img>
+                    <div className='post__name'>
+                        {name}
+                    </div>
+                    <div className='post__descr'>
+                        {descr}
+                    </div>
+                </div>
+            )
+        });
+    }
 
     render() {
-    const {error,posts} = this.state;
+        const {error, posts} = this.state;
 
- if(error){
-     return <ErrorMessage/>
- }
+        if (error) {
+            return <ErrorMessage/>
+        }
 
-    const items = this.renderItems(posts);
+        const items = this.renderItems(posts);
 
-        return(
-           <div className='left'>
-               {items}
-              </div>
+        return (
+            <div className='left'>
+                {items}
+            </div>
         )
     }
 }

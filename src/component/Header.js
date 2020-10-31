@@ -1,14 +1,14 @@
-import React ,{Component}from "react";
+import React, {Component} from "react";
 import logo from '../logo.svg';
 import {Link} from 'react-router-dom'
 
-export  default class Header extends Component {
+export default class Header extends Component {
     render() {
-        return(
+        return (
             <header>
                 <div className='container h-flex'>
                     <Link to='/' className='logo'>
-                        <img src={logo}></img>
+                        <img src={logo}/>
                     </Link>
                     <nav className='links'>
                         <ul>
