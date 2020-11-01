@@ -30,14 +30,14 @@ export default class Posts extends Component {
             posts: posts,
             error: false
         });
-        console.log(this.state.posts);
+    
     }
 
     onError = () => {
         this.setState({
             error: true
         });
-        console.log('good')
+     
     }
 
     renderItems(arr) {
